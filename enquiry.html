@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nike | Enquiry</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Nike Swoosh Logo" width="80" height="40">
+        </div>
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="enquiry.html" class="active">Enquiry</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="form-section">
+            <h1>Product Enquiry Form</h1>
+            <form action="#" method="POST">
+                <label for="name">Full Name:</label><br>
+                <input type="text" id="name" name="name" required style="width:100%; padding:8px; margin-bottom:10px;"><br>
+
+                <label for="email">Email Address:</label><br>
+                <input type="email" id="email" name="email" required style="width:100%; padding:8px; margin-bottom:10px;"><br>
+
+                <label for="product-select">Select Product:</label><br>
+                <select id="product-select" name="product" style="width:100%; padding:8px; margin-bottom:10px;">
+                    <option value="airmax">Nike Hoodie</option>
+                    <option value="techfleece">Nike BagPack</option>
+                    <option value="metcon">Nike Running Shoes</option>
+                    <option value="drifit">Nike Tshirt</option>
+                </select><br>
+
+                <label for="message">Enquiry Details:</label><br>
+                <textarea id="message" name="message" rows="4" required style="width:100%; padding:8px; margin-bottom:10px;"></textarea><br>
+
+                <button type="submit" class="cta-button">Submit Enquiry</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nike, Inc. All Rights Reserved.[cite: 2]</p>
+    </footer>
+</body>
+</html>

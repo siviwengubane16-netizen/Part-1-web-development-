@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nike | Products & Checkout</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        function openCheckout(productName, price) {
+            document.getElementById('catalog-view').style.display = 'none';
+            document.getElementById('checkout-view').style.display = 'block';
+            document.getElementById('selected-product-title').innerText = "Buying: " + productName + " (" + price + ")";
+            document.getElementById('hidden-product').value = productName;
+        }
+
+        function processOrder(event) {
+            event.preventDefault();
+            const randomId = 'NK-' + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('generated-order-id').innerText = randomId;
+            document.getElementById('checkout-view').style.display = 'none';
+            document.getElementById('success-view').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="images/nike-logo.png" alt="Nike Swoosh Logo" width="80" height="40">
+        </div>
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="products.html" class="active">Products</a></li>
+                <li><a href="enquiry.html">Enquiry</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Product Catalog View (4 Products) -->
+        <div id="catalog-view">
+            <h1>Our Products</h1>
+            <p>Check our size chart reference: US 7-12 / UK 6-11 / EU 40-46</p>
+            
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <article class="product-item">
+                    <img src="tshirt.png" alt="Nike Tshirt" width="120">
+                    <h3>Nike Tshirt</h3>
+                    <p>R 2,499.00</p>
+                    <label>Size: <select><option>US 8</option><option>US 9</option><option>US 10</option></select></label><br><br>
+                    <label>Qty: <input type="number" value="1" min="1" style="width: 40px;"></label><br>
+                    <button class="cta-button" onclick="openCheckout('Nike Tshirt', 'R 699.00')">Buy Now</button>
+                </article>
+
+                <!-- Product 2 -->
+                <article class="product-item">
+                    <img src="hoodie.png" alt="Nike Hoodie" width="120">
+                    <h3>Nike Hoodie</h3>
+                    <p>R 1,699.00</p>
+                    <label>Size: <select><option>Small</option><option>Medium</option><option>Large</option></select></label><br><br>
+                    <label>Qty: <input type="number" value="1" min="1" style="width: 40px;"></label><br>
+                    <button class="cta-button" onclick="openCheckout('Nike Hoodie', 'R 1,699.00')">Buy Now</button>
+                </article>
+
+                <!-- Product 3 -->
+                <article class="product-item">
+                    <img src="running.png" alt="Nike Running Shoes" width="120">
+                    <h3>Nike Running Shoes</h3>
+                    <p>R 2,199.00</p>
+                    <label>Size: <select><option>US 8</option><option>US 9</option><option>US 10</option></select></label><br><br>
+                    <label>Qty: <input type="number" value="1" min="1" style="width: 40px;"></label><br>
+                    <button class="cta-button" onclick="openCheckout('Nike Running Shoes', 'R 2,199.00')">Buy Now</button>
+                </article>
+
+                <!-- Product 4 -->
+                <article class="product-item">
+                    <img src="bag.png" alt="Nike BagPack" width="120">
+                    <h3>Nike BagPack</h3>
+                    <p>R 899.00</p>
+                    <label>Size: <select><option>Small</option><option>Medium</option><option>Large</option></select></label><br><br>
+                    <label>Qty: <input type="number" value="1" min="1" style="width: 40px;"></label><br>
+                    <button class="cta-button" onclick="openCheckout('Nike BagPack', 'R 899.00')">Buy Now</button>
+                </article>
+            </div>
+        </div>
+
+        <!-- Checkout / Address Entry View -->
+        <div id="checkout-view" style="display: none;">
+            <h2 id="selected-product-title"></h2>
+            <h3>Enter Shipping Address</h3>
+            <form onsubmit="processOrder(event)">
+                <input type="hidden" id="hidden-product">
+                <label>Full Name:<br><input type="text" required style="width:100%; padding:8px; margin-bottom:10px;"></label>
+                <label>Street Address:<br><input type="text" required style="width:100%; padding:8px; margin-bottom:10px;"></label>
+                <label>City / Suburb:<br><input type="text" required style="width:100%; padding:8px; margin-bottom:10px;"></label>
+                <label>Postal Code:<br><input type="text" required style="width:100%; padding:8px; margin-bottom:15px;"></label><br>
+                <button type="submit" class="cta-button">Place Order</button>
+            </form>
+        </div>
+
+        <!-- Success Message View -->
+        <div id="success-view" style="display: none; text-align: center;">
+            <h2>Congratulations! Your order has been placed successfully.</h2>
+            <p>Your unique Order ID is: <strong id="generated-order-id" style="color: #4895ef; font-size: 1.2em;"></strong></p>
+            <a href="products.html" class="cta-button">Back to Products</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nike, Inc. All Rights Reserved.[cite: 2]</p>
+    </footer>
+</body>
+</html>
