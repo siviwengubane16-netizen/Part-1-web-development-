@@ -9,8 +9,8 @@
         function openCheckout(productName, price) {
             document.getElementById('catalog-view').style.display = 'none';
             document.getElementById('checkout-view').style.display = 'block';
+            document.getElementById('success-view').style.display = 'none';
             document.getElementById('selected-product-title').innerText = "Buying: " + productName + " (" + price + ")";
-            document.getElementById('hidden-product').value = productName;
         }
 
         function processOrder(event) {
@@ -20,13 +20,39 @@
             document.getElementById('checkout-view').style.display = 'none';
             document.getElementById('success-view').style.display = 'block';
         }
+
+        function resetCatalogView() {
+            document.getElementById('success-view').style.display = 'none';
+            document.getElementById('catalog-view').style.display = 'block';
+        }
+
+        // Live Product Search Filter
+        function filterProducts(event) {
+            const query = event.target.value.toLowerCase().trim();
+            const items = document.querySelectorAll('.product-item');
+            items.forEach(item => {
+                const name = item.getAttribute('data-name');
+                if (name.includes(query)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
     </script>
 </head>
 <body>
     <header>
         <div class="logo-container">
-            <img src="images/nike-logo.png" alt="Nike Swoosh Logo" width="80" height="40">
+            <img src="logo.png" alt="Nike Swoosh Logo" width="80" height="40">
         </div>
+        
+        <!-- Live Search Bar -->
+        <div class="search-container">
+            <input type="text" id="live-search" placeholder="Search products..." oninput="filterProducts(event)">
+            <button type="button">🔍</button>
+        </div>
+
         <nav aria-label="Main Navigation">
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -39,73 +65,104 @@
     </header>
 
     <main>
-        <!-- Product Catalog View (4 Products) -->
+        <!-- Product Catalog View -->
         <div id="catalog-view">
             <h1>Our Products</h1>
-            <p>Check our size chart reference: US 7-12 / UK 6-11 / EU 40-46</p>
+            <p class="section-desc">Check our size chart reference: US 7-12 / UK 6-11 / EU 40-46</p>
             
             <div class="product-grid">
-                <!-- Product 1 -->
-                <article class="product-item">
-                    <img src="tshirt.png" alt="Nike Tshirt" width="120">
+                <!-- Product 1 (Change 'tshirt.png' to your custom image filename) -->
+                <article class="product-item" data-name="nike tshirt">
+                    <img src="tshirt.png" alt="Nike Tshirt">
                     <h3>Nike Tshirt</h3>
-                    <p>R 2,499.00</p>
-                    <label>Size: <select><option>US 8</option><option>US 9</option><option>US 10</option></select></label><br><br>
-                    <label>Qty: <input type="number" value="1" min="1" style="width: 40px;"></label><br>
+                    <p>R 699.00</p>
+                    <label>Size: <select><option>Small</option><option>Medium</option><option>Large</option></select></label><br><br>
                     <button class="cta-button" onclick="openCheckout('Nike Tshirt', 'R 699.00')">Buy Now</button>
                 </article>
 
-                <!-- Product 2 -->
-                <article class="product-item">
-                    <img src="hoodie.png" alt="Nike Hoodie" width="120">
+                <!-- Product 2 (Change 'hoodie.png' to your custom image filename) -->
+                <article class="product-item" data-name="nike hoodie">
+                    <img src="hoodie.png" alt="Nike Hoodie">
                     <h3>Nike Hoodie</h3>
                     <p>R 1,699.00</p>
                     <label>Size: <select><option>Small</option><option>Medium</option><option>Large</option></select></label><br><br>
-                    <label>Qty: <input type="number" value="1" min="1" style="width: 40px;"></label><br>
                     <button class="cta-button" onclick="openCheckout('Nike Hoodie', 'R 1,699.00')">Buy Now</button>
                 </article>
 
-                <!-- Product 3 -->
-                <article class="product-item">
-                    <img src="running.png" alt="Nike Running Shoes" width="120">
+                <!-- Product 3 (Change 'running.png' to your custom image filename) -->
+                <article class="product-item" data-name="nike running shoes">
+                    <img src="running.png" alt="Nike Running Shoes">
                     <h3>Nike Running Shoes</h3>
                     <p>R 2,199.00</p>
                     <label>Size: <select><option>US 8</option><option>US 9</option><option>US 10</option></select></label><br><br>
-                    <label>Qty: <input type="number" value="1" min="1" style="width: 40px;"></label><br>
                     <button class="cta-button" onclick="openCheckout('Nike Running Shoes', 'R 2,199.00')">Buy Now</button>
                 </article>
 
-                <!-- Product 4 -->
-                <article class="product-item">
-                    <img src="bag.png" alt="Nike BagPack" width="120">
+                <!-- Product 4 (Change 'bag.png' to your custom image filename) -->
+                <article class="product-item" data-name="nike backpack">
+                    <img src="bag.png" alt="Nike BagPack">
                     <h3>Nike BagPack</h3>
                     <p>R 899.00</p>
-                    <label>Size: <select><option>Small</option><option>Medium</option><option>Large</option></select></label><br><br>
-                    <label>Qty: <input type="number" value="1" min="1" style="width: 40px;"></label><br>
+                    <label>Size: <select><option>One Size</option></select></label><br><br>
                     <button class="cta-button" onclick="openCheckout('Nike BagPack', 'R 899.00')">Buy Now</button>
+                </article>
+
+                <!-- Product 5 (Change 'cap.png' to your custom image filename) -->
+                <article class="product-item" data-name="nike club cap">
+                    <img src="cap.png" alt="Nike Cap">
+                    <h3>Nike Club Cap</h3>
+                    <p>R 399.00</p>
+                    <label>Size: <select><option>Adjustable</option></select></label><br><br>
+                    <button class="cta-button" onclick="openCheckout('Nike Club Cap', 'R 399.00')">Buy Now</button>
+                </article>
+
+                <!-- Product 6 (Change 'shorts.png' to your custom image filename) -->
+                <article class="product-item" data-name="nike dri-fit shorts">
+                    <img src="shorts.png" alt="Nike Shorts">
+                    <h3>Nike Dri-FIT Shorts</h3>
+                    <p>R 799.00</p>
+                    <label>Size: <select><option>Medium</option><option>Large</option></select></label><br><br>
+                    <button class="cta-button" onclick="openCheckout('Nike Dri-FIT Shorts', 'R 799.00')">Buy Now</button>
+                </article>
+
+                <!-- Product 7 (Change 'socks.png' to your custom image filename) -->
+                <article class="product-item" data-name="nike everyday socks">
+                    <img src="socks.png" alt="Nike Socks">
+                    <h3>Nike Everyday Socks (3-Pack)</h3>
+                    <p>R 299.00</p>
+                    <label>Size: <select><option>Medium (UK 6-8)</option><option>Large (UK 9-11)</option></select></label><br><br>
+                    <button class="cta-button" onclick="openCheckout('Nike Everyday Socks', 'R 299.00')">Buy Now</button>
+                </article>
+
+                <!-- Product 8 (Change 'jacket.png' to your custom image filename) -->
+                <article class="product-item" data-name="nike windrunner jacket">
+                    <img src="jacket.png" alt="Nike Jacket">
+                    <h3>Nike Windrunner Jacket</h3>
+                    <p>R 1,999.00</p>
+                    <label>Size: <select><option>Small</option><option>Medium</option><option>Large</option></select></label><br><br>
+                    <button class="cta-button" onclick="openCheckout('Nike Windrunner Jacket', 'R 1,999.00')">Buy Now</button>
                 </article>
             </div>
         </div>
 
-        <!-- Checkout / Address Entry View -->
+        <!-- Checkout View -->
         <div id="checkout-view" style="display: none;">
-            <h2 id="selected-product-title"></h2>
-            <h3>Enter Shipping Address</h3>
+            <h2 id="selected-product-title" style="margin-bottom: 10px;"></h2>
+            <h3 style="margin-bottom: 20px;">Enter Shipping Address</h3>
             <form onsubmit="processOrder(event)">
-                <input type="hidden" id="hidden-product">
-                <label>Full Name:<br><input type="text" required style="width:100%; padding:8px; margin-bottom:10px;"></label>
-                <label>Street Address:<br><input type="text" required style="width:100%; padding:8px; margin-bottom:10px;"></label>
-                <label>City / Suburb:<br><input type="text" required style="width:100%; padding:8px; margin-bottom:10px;"></label>
-                <label>Postal Code:<br><input type="text" required style="width:100%; padding:8px; margin-bottom:15px;"></label><br>
+                <label>Full Name:<input type="text" required></label>
+                <label>Street Address:<input type="text" required></label>
+                <label>City / Suburb:<input type="text" required></label>
+                <label>Postal Code:<input type="text" required></label>
                 <button type="submit" class="cta-button">Place Order</button>
             </form>
         </div>
 
-        <!-- Success Message View -->
-        <div id="success-view" style="display: none; text-align: center;">
+        <!-- Success View -->
+        <div id="success-view" style="display: none; text-align: center; padding: 40px 0;">
             <h2>Congratulations! Your order has been placed successfully.</h2>
-            <p>Your unique Order ID is: <strong id="generated-order-id" style="color: #4895ef; font-size: 1.2em;"></strong></p>
-            <a href="products.html" class="cta-button">Back to Products</a>
+            <p style="margin: 20px 0;">Your unique Order ID is: <strong id="generated-order-id" style="color: var(--accent-color); font-size: 1.2em;"></strong></p>
+            <button class="cta-button" onclick="resetCatalogView()">Back to Products</button>
         </div>
     </main>
 

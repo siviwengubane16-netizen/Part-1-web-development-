@@ -11,6 +11,13 @@
         <div class="logo-container">
             <img src="logo.png" alt="Nike Swoosh Logo" width="80" height="40">
         </div>
+        
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" placeholder="Search products..." onkeypress="if(event.key === 'Enter') { window.location.href='products.html'; }">
+            <button type="button" onclick="window.location.href='products.html'">🔍</button>
+        </div>
+
         <nav aria-label="Main Navigation">
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -25,23 +32,24 @@
     <main>
         <section class="form-section">
             <h1>Product Enquiry Form</h1>
-            <form action="#" method="POST">
-                <label for="name">Full Name:</label><br>
-                <input type="text" id="name" name="name" required style="width:100%; padding:8px; margin-bottom:10px;"><br>
+            <p class="section-desc">Have a specific question regarding our gear? Fill out the form below.</p>
+            <form action="#" method="POST" onsubmit="alert('Enquiry submitted successfully!');">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
 
-                <label for="email">Email Address:</label><br>
-                <input type="email" id="email" name="email" required style="width:100%; padding:8px; margin-bottom:10px;"><br>
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
 
-                <label for="product-select">Select Product:</label><br>
-                <select id="product-select" name="product" style="width:100%; padding:8px; margin-bottom:10px;">
-                    <option value="airmax">Nike Hoodie</option>
-                    <option value="techfleece">Nike BagPack</option>
-                    <option value="metcon">Nike Running Shoes</option>
-                    <option value="drifit">Nike Tshirt</option>
-                </select><br>
+                <label for="product-select">Select Product:</label>
+                <select id="product-select" name="product">
+                    <option value="hoodie">Nike Hoodie</option>
+                    <option value="bagpack">Nike BagPack</option>
+                    <option value="shoes">Nike Running Shoes</option>
+                    <option value="tshirt">Nike Tshirt</option>
+                </select>
 
-                <label for="message">Enquiry Details:</label><br>
-                <textarea id="message" name="message" rows="4" required style="width:100%; padding:8px; margin-bottom:10px;"></textarea><br>
+                <label for="message">Enquiry Details:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
 
                 <button type="submit" class="cta-button">Submit Enquiry</button>
             </form>
