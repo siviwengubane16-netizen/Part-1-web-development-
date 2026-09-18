@@ -5,40 +5,271 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nike | Home</title>
     <link rel="stylesheet" href="css/style.css">
+    <script>
+        function openCheckout(productName, price) {
+            document.getElementById('catalog-view').style.display = 'none';
+            document.getElementById('checkout-view').style.display = 'block';
+            document.getElementById('success-view').style.display = 'none';
+            document.getElementById('selected-product-title').innerText = "Buying: " + productName + " (" + price + ")";
+        }
+
+        function processOrder(event) {
+            event.preventDefault();
+            const randomId = 'NK-' + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('generated-order-id').innerText = randomId;
+            document.getElementById('checkout-view').style.display = 'none';
+            document.getElementById('success-view').style.display = 'block';
+        }
+
+        function resetCatalogView() {
+            document.getElementById('success-view').style.display = 'none';
+            document.getElementById('catalog-view').style.display = 'block';
+        }
+
+        // Live Product Search Filter
+        function filterProducts(event) {
+            const query = event.target.value.toLowerCase().trim();
+            const items = document.querySelectorAll('.product-item');
+            items.forEach(item => {
+                const name = item.getAttribute('data-name');
+                if (name.includes(query)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <header>
         <div class="logo-container">
-            <img src="logo.png" alt="Nike Swoosh Logo" width="80" height="40">
+            <a href="#home"><img src="logo.png" alt="Nike Swoosh Logo" width="80" height="40"></a>
         </div>
         
         <!-- Search Bar -->
         <div class="search-container">
-            <input type="text" id="global-search" placeholder="Search products..." onkeypress="if(event.key === 'Enter') { window.location.href='products.html'; }">
-            <button type="button" onclick="window.location.href='products.html'">🔍</button>
+            <input type="text" id="live-search" placeholder="Search products..." oninput="filterProducts(event)">
+            <button type="button">🔍</button>
         </div>
 
         <nav aria-label="Main Navigation">
             <ul>
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="enquiry.html">Enquiry</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#enquiry">Enquiry</a></li>
+                <li><a href="#contact">Contact Us</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section class="hero-banner">
-            <h1>Just Do It</h1>
-            <p>Explore innovative sportswear and footwear designed to help you achieve your fitness goals.</p>
-            <a href="products.html" class="cta-button">Shop Latest Collection</a>
+        <!-- 1. HOME / HERO SECTION -->
+        <section id="home" class="page-section" style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center;">
+            <div class="hero-banner">
+                <h1>Just Do It</h1>
+                <p>Explore innovative sportswear and footwear designed to help you achieve your fitness goals.</p>
+                <a href="#products" class="cta-button">Shop Latest Collection</a>
+            </div>
+        </section>
+
+        <hr style="margin: 60px 0; border: none; border-top: 1px solid var(--border-color);">
+
+        <!-- 2. ABOUT US SECTION -->
+        <section id="about" class="page-section" style="padding: 40px 0;">
+            <div class="about-content">
+                <h1>About Nike</h1>
+                <p class="section-desc">Our mission is what drives us to do everything possible to expand human potential. We do that by creating groundbreaking sport innovations, by making our products more sustainably, and by building a creative and diverse global team.</p>
+                <a href="#contact" class="cta-button">Get in Touch</a>
+            </div>
+        </section>
+
+        <hr style="margin: 60px 0; border: none; border-top: 1px solid var(--border-color);">
+
+        <!-- 3. PRODUCTS & CHECKOUT SECTION -->
+        <section id="products" class="page-section" style="padding: 40px 0;">
+            <!-- Product Catalog View -->
+            <div id="catalog-view">
+                <h1>Our Products</h1>
+                <p class="section-desc">Check our size chart reference: US 7-12 / UK 6-11 / EU 40-46</p>
+                
+                <div class="product-grid">
+                    <!-- Product 1 -->
+                    <article class="product-item" data-name="nike tshirt">
+                        <img src="tshirt.png" alt="Nike Tshirt">
+                        <h3>Nike Tshirt</h3>
+                        <p>R 699.00</p>
+                        <label>Size: <select><option>Small</option><option>Medium</option><option>Large</option></select></label><br><br>
+                        <button class="cta-button" onclick="openCheckout('Nike Tshirt', 'R 699.00')">Buy Now</button>
+                    </article>
+
+                    <!-- Product 2 -->
+                    <article class="product-item" data-name="nike hoodie">
+                        <img src="hoodie.png" alt="Nike Hoodie">
+                        <h3>Nike Hoodie</h3>
+                        <p>R 1,699.00</p>
+                        <label>Size: <select><option>Small</option><option>Medium</option><option>Large</option></select></label><br><br>
+                        <button class="cta-button" onclick="openCheckout('Nike Hoodie', 'R 1,699.00')">Buy Now</button>
+                    </article>
+
+                    <!-- Product 3 -->
+                    <article class="product-item" data-name="nike running shoes">
+                        <img src="running.png" alt="Nike Running Shoes">
+                        <h3>Nike Running Shoes</h3>
+                        <p>R 2,199.00</p>
+                        <label>Size: <select><option>US 8</option><option>US 9</option><option>US 10</option></select></label><br><br>
+                        <button class="cta-button" onclick="openCheckout('Nike Running Shoes', 'R 2,199.00')">Buy Now</button>
+                    </article>
+
+                    <!-- Product 4 -->
+                    <article class="product-item" data-name="nike backpack">
+                        <img src="bag.png" alt="Nike BagPack">
+                        <h3>Nike BagPack</h3>
+                        <p>R 899.00</p>
+                        <label>Size: <select><option>One Size</option></select></label><br><br>
+                        <button class="cta-button" onclick="openCheckout('Nike BagPack', 'R 899.00')">Buy Now</button>
+                    </article>
+
+                    <!-- Product 5 -->
+                    <article class="product-item" data-name="nike club cap">
+                        <img src="cap.png" alt="Nike Cap">
+                        <h3>Nike Club Cap</h3>
+                        <p>R 399.00</p>
+                        <label>Size: <select><option>Adjustable</option></select></label><br><br>
+                        <button class="cta-button" onclick="openCheckout('Nike Club Cap', 'R 399.00')">Buy Now</button>
+                    </article>
+
+                    <!-- Product 6 -->
+                    <article class="product-item" data-name="nike dri-fit shorts">
+                        <img src="shorts.png" alt="Nike Shorts">
+                        <h3>Nike Dri-FIT Shorts</h3>
+                        <p>R 799.00</p>
+                        <label>Size: <select><option>Medium</option><option>Large</option></select></label><br><br>
+                        <button class="cta-button" onclick="openCheckout('Nike Dri-FIT Shorts', 'R 799.00')">Buy Now</button>
+                    </article>
+
+                    <!-- Product 7 -->
+                    <article class="product-item" data-name="nike everyday socks">
+                        <img src="socks.png" alt="Nike Socks">
+                        <h3>Nike Everyday Socks (3-Pack)</h3>
+                        <p>R 299.00</p>
+                        <label>Size: <select><option>Medium (UK 6-8)</option><option>Large (UK 9-11)</option></select></label><br><br>
+                        <button class="cta-button" onclick="openCheckout('Nike Everyday Socks', 'R 299.00')">Buy Now</button>
+                    </article>
+
+                    <!-- Product 8 -->
+                    <article class="product-item" data-name="nike windrunner jacket">
+                        <img src="jacket.png" alt="Nike Jacket">
+                        <h3>Nike Windrunner Jacket</h3>
+                        <p>R 1,999.00</p>
+                        <label>Size: <select><option>Small</option><option>Medium</option><option>Large</option></select></label><br><br>
+                        <button class="cta-button" onclick="openCheckout('Nike Windrunner Jacket', 'R 1,999.00')">Buy Now</button>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Checkout View -->
+            <div id="checkout-view" style="display: none;">
+                <h2 id="selected-product-title" style="margin-bottom: 10px;"></h2>
+                <h3 style="margin-bottom: 20px;">Enter Shipping Address</h3>
+                <form onsubmit="processOrder(event)">
+                    <label>Full Name:<input type="text" required></label>
+                    <label>Street Address:<input type="text" required></label>
+                    <label>City / Suburb:<input type="text" required></label>
+                    <label>Postal Code:<input type="text" required></label>
+                    <button type="submit" class="cta-button">Place Order</button>
+                </form>
+            </div>
+
+            <!-- Success View -->
+            <div id="success-view" style="display: none; text-align: center; padding: 40px 0;">
+                <h2>Congratulations! Your order has been placed successfully.</h2>
+                <p style="margin: 20px 0;">Your unique Order ID is: <strong id="generated-order-id" style="color: var(--accent-color); font-size: 1.2em;"></strong></p>
+                <button class="cta-button" onclick="resetCatalogView()">Back to Products</button>
+            </div>
+        </section>
+
+        <hr style="margin: 60px 0; border: none; border-top: 1px solid var(--border-color);">
+
+        <!-- 4. ENQUIRY SECTION -->
+        <section id="enquiry" class="page-section" style="padding: 40px 0;">
+            <div class="form-section">
+                <h1>Product Enquiry Form</h1>
+                <p class="section-desc">Have a specific question regarding our gear? Fill out the form below.</p>
+                <form action="#" method="POST" onsubmit="alert('Enquiry submitted successfully!');">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="product-select">Select Product:</label>
+                    <select id="product-select" name="product">
+                        <option value="hoodie">Nike Hoodie</option>
+                        <option value="bagpack">Nike BagPack</option>
+                        <option value="shoes">Nike Running Shoes</option>
+                        <option value="tshirt">Nike Tshirt</option>
+                    </select>
+
+                    <label for="message">Enquiry Details:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+
+                    <button type="submit" class="cta-button">Submit Enquiry</button>
+                </form>
+            </div>
+        </section>
+
+        <hr style="margin: 60px 0; border: none; border-top: 1px solid var(--border-color);">
+
+        <!-- 5. CONTACT US SECTION -->
+        <section id="contact" class="page-section" style="padding: 40px 0;">
+            <div class="contact-section">
+                <h1>Contact Us</h1>
+                <p class="section-desc">Have questions or feedback? Reach out to our support team directly or visit our headquarters below.</p>
+                
+                <div class="contact-details">
+                    <p><strong>Email:</strong> support@nike.com</p>
+                    <p><strong>Phone:</strong> +27 11 123 4567</p>
+                </div>
+
+                <div class="map-container">
+                    <h3 style="margin-bottom: 10px;">Our Location</h3>
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3580.3705035222045!2d28.047305!3d-26.107567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDA2JzI3LjMiUyAyOMKwMDInNTAuMyJF!5e0!3m2!1sen!2sza!4v1620000000000!5m2!1sen!2sza" 
+                        width="100%" 
+                        height="300" 
+                        style="border:0; border-radius: 8px;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+                <form action="#" method="POST" onsubmit="alert('Message sent successfully! We will get back to you soon.');">
+                    <label for="contact-name">Your Name:</label>
+                    <input type="text" id="contact-name" name="name" required>
+
+                    <label for="contact-email">Your Email:</label>
+                    <input type="email" id="contact-email" name="email" required>
+
+                    <label for="contact-msg">Message:</label>
+                    <textarea id="contact-msg" name="message" rows="4" required></textarea>
+
+                    <button type="submit" class="cta-button">Send Message</button>
+                </form>
+            </div>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2026 Nike, Inc. All Rights Reserved.[cite: 2]</p>
     </footer>
+
+    <!-- Smooth Scrolling CSS Adjustment -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </body>
 </html>

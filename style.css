@@ -120,7 +120,7 @@ nav a:hover, nav a.active {
    ================================---------- */
 .hero-banner {
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-                url('../running.png') no-repeat center center/cover;
+                url('https://i.pinimg.com/originals/a8/64/96/a8649600e0d254d4477e8e9abb9427dd.png') no-repeat center center/cover;
     height: 70vh;
     display: flex;
     flex-direction: column;
